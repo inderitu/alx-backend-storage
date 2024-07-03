@@ -7,6 +7,18 @@ import redis
 from uuid import uuid4
 from typing import Union, Optional, Callable
 
+"""
+Above Cache define a count_calls decorator that takes a single method Callable
+argument and returns a Callable
+"""
+
+
+def count_calls(method: Callable) -> Callable:
+    """
+    count how many times methods of the Cache class are called
+    """
+    return
+
 
 class Cache:
     def __init__(self):
