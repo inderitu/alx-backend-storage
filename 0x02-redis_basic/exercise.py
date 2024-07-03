@@ -68,6 +68,10 @@ def replay(fn: Callable):
 
 
 class Cache:
+    """
+    represents redis db
+    """
+
     def __init__(self):
         """
         store an instance of redis client
