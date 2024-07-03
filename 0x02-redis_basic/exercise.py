@@ -6,6 +6,7 @@ redis db module
 import redis
 from uuid import uuid4
 from typing import Union, Optional, Callable
+from functools import wraps
 
 """
 Above Cache define a count_calls decorator that takes a single method Callable
@@ -17,7 +18,13 @@ def count_calls(method: Callable) -> Callable:
     """
     count how many times methods of the Cache class are called
     """
-    return
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache:
